@@ -8,16 +8,23 @@ import { v4 as uuid } from "uuid";
 // To dlete use Filter Method.
 // [1,2,3,4,5].filter(i%2==0) make a copy of array with only satisfya the condition.
 
+// Keep above two points in your mind.....
+
 export default function EmojiClicker(){
     const [emojis,setEmoji] = useState([{id:uuid(),emoji:"🔥"}]);
     const InsEmoji = () =>{
         setEmoji((oldEmoji)=>[...oldEmoji,{id:uuid(),emoji:"💧"}]);
     }
+    const deleteEmoji=(id)=>{
+        setEmoji((prevEmojis)=>{
+            return prevEmojis.filter(e=> e.id!=id);
+        })
+    }
     return (
         <div>
             {emojis.map((i)=>(
                 <span  key={i.id}
-                style={{fontSize:"60px"}}>{i.emoji}</span>
+                style={{fontSize:"60px"}} onClick={()=> deleteEmoji(i.id)}>{i.emoji}</span>
             ))}
             <button onClick={InsEmoji}>Add Emoji</button>
         </div>
